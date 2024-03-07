@@ -30,13 +30,13 @@ def buscar_usuarios_sin_repeticiones(df):
         # Preguntar si desea trasladar los datos al archivo de Excel
         respuesta = input("¿Desea trasladar estos datos al archivo de Excel? (sí/no): ").lower()
         if respuesta == 'si':
-            guardar_resultados_en_excel(resultado_sin_repeticiones)
+            guardar_resultados_en_excel(resultado_sin_repeticiones, 'FiltroPorRutas')
     else:
         print("No se encontraron resultados para las condiciones dadas.")
 
-def guardar_resultados_en_excel(df_resultados):
+def guardar_resultados_en_excel(df_resultados, nombre_archivo):
     # Obtener el nombre del archivo Excel
-    archivo_excel = Path('./DatosTraslados.xlsx')
+    archivo_excel = Path(f'./{nombre_archivo}.xlsx')
 
     # Si el archivo no existe, crearlo y escribir los datos
     if not archivo_excel.is_file():
@@ -125,7 +125,7 @@ def buscar_usrnoms_por_rutas(df, rutas):
         if duplicados_eliminados > 0:
             print(f"Se eliminaron {duplicados_eliminados} elementos duplicados.")
 
-        guardar_resultados_en_excel(df_resultados)
+        guardar_resultados_en_excel(df_resultados, 'FiltroPorRutas')
     else:
         print("No se encontraron resultados para las RutaNombre dadas.")
 
@@ -160,5 +160,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
-#Hola mundo
