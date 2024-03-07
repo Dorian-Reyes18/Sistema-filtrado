@@ -120,11 +120,6 @@ def buscar_usrnoms_por_rutas(df, rutas):
         print("\nResultados para todas las RutaNombre:")
         print(df_resultados.to_string(index=False))
 
-        # Imprimir elementos duplicados eliminados
-        duplicados_eliminados = len(df_resultados) - len(df_resultados.drop_duplicates(subset=['RutaNombre', 'UsrNom']))
-        if duplicados_eliminados > 0:
-            print(f"Se eliminaron {duplicados_eliminados} elementos duplicados.")
-
         guardar_resultados_en_excel(df_resultados, 'FiltroPorRutas')
     else:
         print("No se encontraron resultados para las RutaNombre dadas.")
