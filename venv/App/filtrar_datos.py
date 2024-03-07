@@ -8,6 +8,8 @@ def obtener_condiciones_por_teclado():
     print("Ingresa las condiciones de búsqueda:")
     fac_gr_nombre = input("FacGrNombre: ")
     ruta_nombre = input("RutaNombre: ")
+    
+    #HOla mundo
 
     return {'FacGrNombre': fac_gr_nombre, 'RutaNombre': ruta_nombre}
 
