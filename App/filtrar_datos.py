@@ -8,6 +8,8 @@ def obtener_condiciones_por_teclado():
     print("Ingresa las condiciones de búsqueda:")
     fac_gr_nombre = input("FacGrNombre: ")
     ruta_nombre = input("RutaNombre: ")
+    
+    #HOla mundo
 
     return {'FacGrNombre': fac_gr_nombre, 'RutaNombre': ruta_nombre}
 
@@ -22,21 +24,19 @@ def buscar_usuarios_sin_repeticiones(df):
     # Eliminar duplicados de UsrNom
     resultado_sin_repeticiones = resultado[['RutaNombre', 'UsrNom', 'UsrPersona']].drop_duplicates(subset='UsrNom')
 
-    # Mostrar resultados sin repeticiones
+    # Mostrar resultados en consola
     if not resultado_sin_repeticiones.empty:
         print("Resultados de la búsqueda:")
         print(resultado_sin_repeticiones.to_string(index=False))
 
-        # Preguntar si desea trasladar los datos al archivo de Excel
-        respuesta = input("¿Desea trasladar estos datos al archivo de Excel? (sí/no): ").lower()
-        if respuesta == 'si':
-            guardar_resultados_en_excel(resultado_sin_repeticiones)
+        # Exportar resultados al archivo de Excel sin preguntar al usuario
+        guardar_resultados_en_excel(resultado_sin_repeticiones, 'FiltroRutaUnica')
     else:
         print("No se encontraron resultados para las condiciones dadas.")
 
-def guardar_resultados_en_excel(df_resultados):
+def guardar_resultados_en_excel(df_resultados, nombre_archivo):
     # Obtener el nombre del archivo Excel
-    archivo_excel = Path('./DatosTraslados.xlsx')
+    archivo_excel = Path(f'./{nombre_archivo}.xlsx')
 
     # Si el archivo no existe, crearlo y escribir los datos
     if not archivo_excel.is_file():
@@ -115,17 +115,12 @@ def buscar_usrnoms_por_rutas(df, rutas):
     # Concatenar todos los resultados en un solo DataFrame
     df_resultados = pd.concat(resultados)
 
-    # Mostrar resultados y guardar en nuevo Excel
+    # Mostrar resultados en consola y guardar en nuevo Excel
     if not df_resultados.empty:
         print("\nResultados para todas las RutaNombre:")
         print(df_resultados.to_string(index=False))
 
-        # Imprimir elementos duplicados eliminados
-        duplicados_eliminados = len(df_resultados) - len(df_resultados.drop_duplicates(subset=['RutaNombre', 'UsrNom']))
-        if duplicados_eliminados > 0:
-            print(f"Se eliminaron {duplicados_eliminados} elementos duplicados.")
-
-        guardar_resultados_en_excel(df_resultados)
+        guardar_resultados_en_excel(df_resultados, 'FiltroRutaUnica')
     else:
         print("No se encontraron resultados para las RutaNombre dadas.")
 
@@ -160,5 +155,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
-#Hola mundo
