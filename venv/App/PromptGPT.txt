@@ -1,0 +1,28 @@
+Me ayudas con el siguiente proyecto que quiero realizar en python:
+
+Abrir un archivo de excel que contiene una tabla con las base de datos con las siguientes columnas:
+1.FacGrNombre
+2.RutaNombre
+3.PeriodoFac
+4.UsrNom
+5.UsrPersona
+(En ese mismo orden que te di esta cada columna).
+
+EL proyecto trata:
+
+1.Filtrar las FacGrNombre y las RutaNombre para saber los UsrNom que han realizado esos trabajos en el periodo PeriodoFac.
+
+Ejemplo de la tabla:
+FacGrNombre	RutaNombre	PeriodoFac	UsrNom	UsrPersona
+A_MANAGUA	GOBL5-PORTM PORTEZUELO	201804	AAGUIRRET	ALLAN FREDDY AGUIRRE TORREZ
+		201909	AFLORESV	AARON MOISES FLORES VASQUEZ
+		202002	CMARTINEZF	CARLOS EZEQUIEL MARTINEZ FONSECA
+		202003	IGAITAN	IGNACIO ANTONIO GAITAN HURTADO
+
+Teniendo en cuenta que ya tenemos creado nuestro entorno en python, dime el paso a paso para ejecutar esta primera fase.
+
+Nuevas condiciones:
+
+Ok ya esta sirviendo el filtrado, pero la busqueda quiero que se realice, con los siguientes criterios:
+El programa solo le pide al usuario el FacGrNombre y RutaNombre y luego me debes mostrar el UsrNom y el  UsrPersona sin repetirse, por ejemplo un mismo usuario se repite muchas veces por que tiene registros en el periodoFac no queremos esas repeticiones si no solo saber el usuario 
+
