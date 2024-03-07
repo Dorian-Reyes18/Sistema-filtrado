@@ -22,15 +22,13 @@ def buscar_usuarios_sin_repeticiones(df):
     # Eliminar duplicados de UsrNom
     resultado_sin_repeticiones = resultado[['RutaNombre', 'UsrNom', 'UsrPersona']].drop_duplicates(subset='UsrNom')
 
-    # Mostrar resultados sin repeticiones
+    # Mostrar resultados en consola
     if not resultado_sin_repeticiones.empty:
         print("Resultados de la búsqueda:")
         print(resultado_sin_repeticiones.to_string(index=False))
 
-        # Preguntar si desea trasladar los datos al archivo de Excel
-        respuesta = input("¿Desea trasladar estos datos al archivo de Excel? (sí/no): ").lower()
-        if respuesta == 'si':
-            guardar_resultados_en_excel(resultado_sin_repeticiones, 'FiltroPorRutas')
+        # Exportar resultados al archivo de Excel sin preguntar al usuario
+        guardar_resultados_en_excel(resultado_sin_repeticiones, 'FiltroRutaUnica')
     else:
         print("No se encontraron resultados para las condiciones dadas.")
 
@@ -115,12 +113,12 @@ def buscar_usrnoms_por_rutas(df, rutas):
     # Concatenar todos los resultados en un solo DataFrame
     df_resultados = pd.concat(resultados)
 
-    # Mostrar resultados y guardar en nuevo Excel
+    # Mostrar resultados en consola y guardar en nuevo Excel
     if not df_resultados.empty:
         print("\nResultados para todas las RutaNombre:")
         print(df_resultados.to_string(index=False))
 
-        guardar_resultados_en_excel(df_resultados, 'FiltroPorRutas')
+        guardar_resultados_en_excel(df_resultados, 'FiltroRutaUnica')
     else:
         print("No se encontraron resultados para las RutaNombre dadas.")
 
