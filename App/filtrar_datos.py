@@ -1,15 +1,10 @@
 import pandas as pd
-import xlsxwriter
 from pathlib import Path
-import openpyxl
-from openpyxl.worksheet.table import Table, TableStyleInfo
 
 def obtener_condiciones_por_teclado():
     print("Ingresa las condiciones de búsqueda:")
     fac_gr_nombre = input("FacGrNombre: ")
     ruta_nombre = input("RutaNombre: ")
-    
-    #HOla mundo
 
     return {'FacGrNombre': fac_gr_nombre, 'RutaNombre': ruta_nombre}
 
@@ -60,38 +55,6 @@ def guardar_resultados_en_excel(df_resultados, nombre_archivo):
                 df_resultados.to_excel(writer, sheet_name='Sheet1', index=False)
 
     print(f"Datos trasladados con éxito al archivo Excel '{archivo_excel}'.")
-    # Agregar tabla dinámica
-    agregar_tabla_dinamica(archivo_excel)
-
-def agregar_tabla_dinamica(archivo_excel):
-    # Abrir el archivo Excel con openpyxl
-    wb = openpyxl.load_workbook(archivo_excel)
-
-    # Seleccionar la hoja de trabajo (puedes ajustar el nombre si es diferente)
-    hoja = wb['Sheet1']
-
-    # Obtener la dirección de la tabla
-    max_row = hoja.max_row
-    max_col = hoja.max_column
-    tabla_range = openpyxl.utils.get_column_letter(1) + '1:' + openpyxl.utils.get_column_letter(max_col) + str(max_row)
-
-    # Crear un objeto Table para la tabla dinámica
-    tabla = Table(displayName="TablaDinamica", ref=tabla_range)
-
-    # Dar formato a la tabla (puedes ajustar el estilo según tus preferencias)
-    estilo_tabla = TableStyleInfo(
-        name="TableStyleMedium9", showFirstColumn=False,
-        showLastColumn=False, showRowStripes=True, showColumnStripes=True
-    )
-    tabla.tableStyleInfo = estilo_tabla
-
-    # Agregar la tabla a la hoja de trabajo
-    hoja.add_table(tabla)
-
-    # Guardar los cambios en el archivo Excel
-    wb.save(archivo_excel)
-
-    print("Tabla dinámica agregada con éxito al archivo Excel.")
 
 def obtener_rutas_desde_hoja2(archivo_excel):
     try:
@@ -120,7 +83,7 @@ def buscar_usrnoms_por_rutas(df, rutas):
         print("\nResultados para todas las RutaNombre:")
         print(df_resultados.to_string(index=False))
 
-        guardar_resultados_en_excel(df_resultados, 'FiltroRutaUnica')
+        guardar_resultados_en_excel(df_resultados, 'FiltroRutasMultiples')
     else:
         print("No se encontraron resultados para las RutaNombre dadas.")
 
@@ -155,4 +118,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-#comentario
