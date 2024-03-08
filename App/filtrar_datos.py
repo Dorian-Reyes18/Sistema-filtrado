@@ -30,31 +30,32 @@ def buscar_usuarios_sin_repeticiones(df):
         print("No se encontraron resultados para las condiciones dadas.")
 
 def guardar_resultados_en_excel(df_resultados, nombre_archivo):
-    # Obtener el nombre del archivo Excel
     archivo_excel = Path(f'./{nombre_archivo}.xlsx')
 
-    # Si el archivo no existe, crearlo y escribir los datos
     if not archivo_excel.is_file():
-        with pd.ExcelWriter(archivo_excel, engine='xlsxwriter') as writer:
-            df_resultados.to_excel(writer, sheet_name='Sheet1', index=False)
-    else:
-        # Si el archivo existe, abrirlo y agregar los datos al final de la hoja existente
-        with pd.ExcelWriter(archivo_excel, mode='a', engine='openpyxl') as writer:
-            # Verificar si la hoja 'Sheet1' ya existe
-            if 'Sheet1' in pd.ExcelFile(archivo_excel).sheet_names:
-                # Leer el DataFrame actual en el archivo Excel
-                df_existente = pd.read_excel(archivo_excel, sheet_name='Sheet1')
-                
-                # Concatenar el nuevo DataFrame con el existente y eliminar duplicados
-                df_resultados_final = pd.concat([df_existente, df_resultados], ignore_index=True).drop_duplicates(subset=['RutaNombre', 'UsrNom'])
-                
-                # Escribir el DataFrame final en el archivo Excel
-                df_resultados_final.to_excel(writer, sheet_name='Sheet1', index=False)
-            else:
-                # Si la hoja no existe, simplemente escribir el nuevo DataFrame
+        opcion = input("La hoja 'Sheet1' no existe. ¿Qué desea hacer?\n1. Agregar\n2. Cancelar\nIngrese el número de la opción deseada: ")
+        if opcion == '1':
+            with pd.ExcelWriter(archivo_excel, engine='xlsxwriter') as writer:
                 df_resultados.to_excel(writer, sheet_name='Sheet1', index=False)
+            print(f"Datos trasladados con éxito al archivo Excel '{archivo_excel}'.")
+        elif opcion == '2':
+            print("Operación cancelada.")
+        else:
+            print("Opción no válida. Intente de nuevo.")
+    else:
+        opcion = input("La hoja 'Sheet1' ya existe. ¿Qué desea hacer?\n1. Sobrescribir\n2. Cancelar\nIngrese el número de la opción deseada: ")
+        if opcion == '1':
+            with pd.ExcelWriter(archivo_excel, engine='xlsxwriter', mode='w') as writer:
+                df_resultados.to_excel(writer, sheet_name='Sheet1', index=False)
+            print(f"Datos trasladados con éxito al archivo Excel '{archivo_excel}' (hoja sobrescrita).")
+        elif opcion == '2':
+            print("Operación cancelada.")
+        else:
+            print("Opción no válida. Intente de nuevo.")
 
-    print(f"Datos trasladados con éxito al archivo Excel '{archivo_excel}'.")
+
+
+
 
 def obtener_rutas_desde_hoja2(archivo_excel):
     try:
