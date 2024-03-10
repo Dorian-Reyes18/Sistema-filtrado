@@ -37,17 +37,17 @@ def buscar():
             rutas = [ruta.strip().upper() for ruta in request.form['rutas'].split(',') if ruta.strip()]
             resultado = buscar_usrnoms_por_rutas(df, rutas)
         else:
-            return render_template('error.html', message="Error: No se proporcionaron datos de búsqueda válidos")
+            return "Error: No se proporcionaron datos de búsqueda válidos"
 
         if resultado.empty:
-            return render_template('sin_resultados.html')
+            return "No se encontraron resultados."
 
         resultado = resultado.pivot(index='RutaNombre', columns='UsrNom', values='UsrPersona').fillna('')
         resultado = resultado.reset_index().rename_axis(None, axis=1)
 
-        return render_template('resultado.html', resultados=resultado.to_dict(orient='records'))
+        return resultado.to_html()
     except Exception as e:
-        return render_template('error.html', message=f"Error inesperado: {str(e)}")
+        return f"Error inesperado: {str(e)}"
 
 if __name__ == '__main__':
     app.run(debug=True)
