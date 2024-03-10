@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import pandas as pd
 import os
 
-app = Flask(__name__, static_url_path='/static')
+app = Flask(_name_, static_url_path='/static')
 
 # Lógica de búsqueda por listado de rutas
 def buscar_usrnoms_por_rutas(df, rutas):
@@ -38,17 +38,19 @@ def buscar():
             rutas = [ruta.strip().upper() for ruta in request.form['rutas'].split(',') if ruta.strip()]
             resultado = buscar_usrnoms_por_rutas(df, rutas)
         else:
-            return "Error: No se proporcionaron datos de búsqueda válidos"
+            return render_template('error.html', message="Error: No se proporcionaron datos de búsqueda válidos")
 
         if resultado.empty:
-            return "No se encontraron resultados."
+            return render_template('sin_resultados.html')
 
         resultado = resultado.pivot(index='RutaNombre', columns='UsrNom', values='UsrPersona').fillna('')
         resultado = resultado.reset_index().rename_axis(None, axis=1)
 
-        return resultado.to_html()
+        return render_template('resultado.html', resultados=resultado.to_dict(orient='records'))
     except Exception as e:
-        return f"Error inesperado: {str(e)}"
+        return render_template('error.html', message=f"Error inesperado: {str(e)}")
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if _name_ == '_main_':
+    # app.run(debug=True)
+    app.run(debug=True, port = 5001)
+    
