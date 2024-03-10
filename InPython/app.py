@@ -25,13 +25,7 @@ def index():
 @app.route('/buscar', methods=['POST'])
 def buscar():
     try:
-        # Cambios en la obtención de la ruta al archivo Excel
-        archivo_excel = os.path.abspath('SistemaConsultas_RutasLectores.xlsx')
-
-        # Mensajes de depuración
-        print(f'Ruta al archivo Excel: {archivo_excel}')
-        print(f'¿El archivo existe?: {os.path.exists(archivo_excel)}')
-
+        archivo_excel = './SistemaConsultas_RutasLectores.xlsx'
         df = pd.read_excel(archivo_excel)
 
         if 'FacGrNombre' in request.form and 'RutaNombre' in request.form:
@@ -44,18 +38,17 @@ def buscar():
             rutas = [ruta.strip().upper() for ruta in request.form['rutas'].split(',') if ruta.strip()]
             resultado = buscar_usrnoms_por_rutas(df, rutas)
         else:
-            return "Error: No se proporcionaron datos de búsqueda válidos"
+            return render_template('error.html', message="Error: No se proporcionaron datos de búsqueda válidos")
 
         if resultado.empty:
-            return "No se encontraron resultados."
+            return render_template('sin_resultados.html')
 
         resultado = resultado.pivot(index='RutaNombre', columns='UsrNom', values='UsrPersona').fillna('')
         resultado = resultado.reset_index().rename_axis(None, axis=1)
 
-        return resultado.to_html()
+        return render_template('resultado.html', resultados=resultado.to_dict(orient='records'))
     except Exception as e:
-        return f"Error inesperado: {str(e)}"
+        return render_template('error.html', message=f"Error inesperado: {str(e)}")
 
 if __name__ == '__main__':
-    # app.run(debug=True)
-    app.run(debug=True, port=5001)
+    app.run(debug=True)
