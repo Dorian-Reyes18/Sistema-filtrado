@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import pandas as pd
 import os
 
-app = Flask(_name_, static_url_path='/static')
+app = Flask(__name__, static_url_path='/static')
 
 # Lógica de búsqueda por listado de rutas
 def buscar_usrnoms_por_rutas(df, rutas):
@@ -50,7 +50,7 @@ def buscar():
     except Exception as e:
         return render_template('error.html', message=f"Error inesperado: {str(e)}")
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     # app.run(debug=True)
     app.run(debug=True, port = 5001)
     
