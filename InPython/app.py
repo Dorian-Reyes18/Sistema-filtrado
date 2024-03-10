@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import pandas as pd
 import os
+import openpyxl
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -20,7 +21,16 @@ def buscar_usrnoms_por_rutas(df, rutas):
 # Define las rutas de tu aplicación
 @app.route('/')
 def index():
-    return render_template('index.html')
+    try:
+        archivo_excel = './SistemaConsultas_RutasLectores.xlsx'
+        df = pd.read_excel(archivo_excel)
+
+        # Obtener los valores únicos de la columna FacGrNombre
+        opciones_facgrnombre = df['FacGrNombre'].unique().tolist()
+
+        return render_template('index.html', opciones_facgrnombre=opciones_facgrnombre)
+    except Exception as e:
+        return render_template('error.html', message=f"Error inesperado: {str(e)}")
 
 @app.route('/buscar', methods=['POST'])
 def buscar():
@@ -51,6 +61,4 @@ def buscar():
         return render_template('error.html', message=f"Error inesperado: {str(e)}")
 
 if __name__ == '__main__':
-    # app.run(debug=True)
-    app.run(debug=True, port = 5001)
-    
+    app.run(debug=True, port=5001)
