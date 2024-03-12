@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,MAAM;EACF,gBAAgB,EAAE,KAAK;;ACD3B,MAAM;EACF,gBAAgB,EAAE,KAAK;;ACD3B,MAAM;EACF,gBAAgB,EAAE,KAAK;;ACD3B,MAAM;EACF,gBAAgB,EAAE,KAAK",
+"sources": ["../sass/variables.scss","../sass/footer.scss","../sass/header.scss","../sass/body.scss"],
+"names": [],
+"file": "styles.css"
+}
