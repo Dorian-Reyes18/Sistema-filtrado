@@ -27,7 +27,7 @@
                     <table border="1">
                         <thead>
                             <tr>
-                                <th>RutaNombre</th>
+                                <th class="table-fixed">RutaNombre</th>
                                 {% for usrnom in resultados[0].keys() %} {% if usrnom !=
                                 'RutaNombre' %}
                                 <th>{{ usrnom }}</th>
@@ -37,7 +37,7 @@
                         <tbody>
                             {% for resultado in resultados %}
                             <tr>
-                                <td>{{ resultado['RutaNombre'] }}</td>
+                                <td class="table-fixed">{{ resultado['RutaNombre'] }}</td>
                                 {% for usrnom in resultados[0].keys() %} {% if usrnom !=
                                 'RutaNombre' %}
                                 <td>{{ resultado[usrnom] }}</td>

@@ -89,7 +89,15 @@
       gap: 10px;
 
       .scroll-table {
+        display: block;
         overflow: auto;
+        .table-fixed {
+          position: sticky;
+          left: 0;
+          z-index: 1; /* Asegura que la columna fija esté por encima del contenido desplazable */
+          background-color: $color-verde-resaltador;
+          border: 1px solid #818181; /* Puedes personalizar el color de fondo según tus preferencias */
+        }
       }
     }
   }

@@ -142,7 +142,16 @@ nav {
     grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
     gap: 10px; }
     .container2 .hj-container .all-Tables .scroll-table {
+      display: block;
       overflow: auto; }
+      .container2 .hj-container .all-Tables .scroll-table .table-fixed {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        /* Asegura que la columna fija esté por encima del contenido desplazable */
+        background-color: #b5ffba;
+        border: 1px solid #818181;
+        /* Puedes personalizar el color de fondo según tus preferencias */ }
 
 footer {
   background-color: #1a237e;
