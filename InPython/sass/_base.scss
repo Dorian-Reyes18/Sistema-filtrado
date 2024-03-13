@@ -1,18 +1,12 @@
 body {
   background-color: $color-blanco-t1;
-  /* Color de fondo celeste */
   font-family: Arial, sans-serif;
-  /* Fuente del texto */
   margin: 0;
-  /* Elimina el margen predeterminado */
   padding: 0;
-  /* Elimina el relleno predeterminado */
   background-image: url("https://img.freepik.com/vector-gratis/marco-fondo-azul-fluido_53876-99019.jpg?w=740&t=st=1710040527~exp=1710041127~hmac=de57373a9c52d4d4524d09c0d09d8294a6957da83a7e134d27577f3146098df8e");
   background-size: cover;
   background-position: center;
-  /* Ajusta el tamaño y la posición de la imagen de fondo */
   background-attachment: fixed;
-  /* Fija la imagen de fondo para que no se mueva con el desplazamiento */
 
   h1 {
     font-size: 36px;
