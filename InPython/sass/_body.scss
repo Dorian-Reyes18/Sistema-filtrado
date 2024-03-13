@@ -77,3 +77,20 @@
     }
   }
 }
+
+.container2 {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  .hj-container {
+    .all-Tables {
+      display: grid;
+      grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+
+      .scroll-table {
+        overflow: auto;
+      }
+    }
+  }
+}
