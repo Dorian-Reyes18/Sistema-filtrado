@@ -1,14 +1,15 @@
-nav{
+nav {
     background-color: $color-Azul-Base;
     padding: 10px 0;
-    ul{
+    margin-bottom: 30 px;
+    ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
-        li{
+        li {
             display: inline;
             margin-right: 20px;
-            a{
+            a {
                 color: $color-blanco-Base;
                 text-decoration: none;
                 font-weight: bold;
